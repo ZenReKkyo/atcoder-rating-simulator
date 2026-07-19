@@ -35,6 +35,27 @@ python3 -m http.server 8000
 | `contests_heuristic.json` | ヒューリスティックコンテストの種別・重み DB |
 | `tools/build_contest_db.js` | 上記 DB の生成スクリプト |
 | `tools/heuristic_contest_ids.json` | 対象コンテスト ID 一覧（公式アーカイブ由来） |
+| `favicon.svg` / `favicon.ico` / `apple-touch-icon.png` | ファビコン（透明背景 + 黒の ρ） |
+| `tools/make_favicon.py` | ファビコンの生成スクリプト |
+
+## ファビコン
+
+透明背景に黒のギリシャ文字「ρ」。DejaVu Sans Bold のアウトラインから生成しています。
+
+```bash
+python3 tools/make_favicon.py    # Pillow と fontTools が必要
+```
+
+| ファイル | サイズ | 用途 |
+| --- | --- | --- |
+| `favicon.svg` | ベクタ | 対応ブラウザではこれが優先される。フォント非依存のパス化済み |
+| `favicon.ico` | 16 / 32 / 48 px | レガシー用。タブ・ブックマーク・デスクトップ |
+| `apple-touch-icon.png` | 180 px | iOS のホーム画面 |
+
+> **注意**: 黒一色のため、ダークテーマのタブバーではほとんど見えません。
+> また iOS はホーム画面アイコンの透明部分を黒で塗り潰すため、`apple-touch-icon.png` は
+> 事実上「黒地に黒」になります。背景色を付けるか、
+> `favicon.svg` に `prefers-color-scheme` を入れて配色を切り替えると解消します。
 
 ## コンテスト重み DB
 
