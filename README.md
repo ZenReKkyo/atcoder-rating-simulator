@@ -30,8 +30,13 @@ AHC ver.2 では各コンテストに重みがあるため、履歴 JSON を読�
 `contests_heuristic.json` から自動で判定します。
 
 ```bash
-node tools/build_contest_db.js          # 再生成（ネットワークが必要）
+node tools/build_contest_db.js               # 再生成（ネットワークが必要）
+node tools/build_contest_db.js --cached-ids  # ID 一覧はローカルのものを使う
 ```
+
+**毎週月曜 06:00 JST に GitHub Actions が自動で再生成します**
+（[`.github/workflows/update-contest-db.yml`](.github/workflows/update-contest-db.yml)、手動実行も可）。
+差分があるときだけコミットし、push により GitHub Pages も自動で更新されます。
 
 - 対象コンテストの ID は公式アーカイブ
   <https://atcoder.jp/contests/archive?ratedType=4> から取得（`tools/heuristic_contest_ids.json`）。
@@ -104,6 +109,8 @@ $$ r = \sum_i q_i\left(R^{s_{i-1}} - R^{s_i}\right),\qquad R = 0.8271973364 $$
   2026 年の具体的な数値は 2026-07 時点で公表されていません
   （`AHC_rating_v2.pdf` は 2024-12-27 から未更新、v3 も存在せず、各コンテストページにも記載なし）。
   本 DB は 2025 年と同じ 長期 1.0 / 短期 0.5 を**暫定採用**しています。
+  **自動更新はコンテスト一覧の追随のみで、重み規定の変更は検知しません。**
+  公式が新しい重みを発表したら `tools/build_contest_db.js` の `weightOf()` を手で更新してください。
   2025 年はこれで長期 6.0・短期 6.0 と釣り合っていましたが、2026 年の長期／短期の開催数比が
   1:2 から外れれば別の係数になるはずで、これは導出ではなく仮定です。
 

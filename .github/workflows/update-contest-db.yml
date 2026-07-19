@@ -1,0 +1,40 @@
+name: コンテスト重み DB の更新
+
+on:
+  schedule:
+    # 毎週月曜 06:00 JST（日曜 21:00 UTC）。AHC は日曜夕方に終わることが多い
+    - cron: "0 21 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-contest-db
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: DB を再生成
+        run: node tools/build_contest_db.js
+
+      - name: 変更があればコミット
+        run: |
+          if git diff --quiet -- contests_heuristic.json tools/heuristic_contest_ids.json; then
+            echo "変更なし" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add contests_heuristic.json tools/heuristic_contest_ids.json
+          git commit -m "コンテスト重み DB を自動更新"
+          git push
+          echo "更新をコミットしました" >> "$GITHUB_STEP_SUMMARY"

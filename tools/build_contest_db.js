@@ -3,12 +3,13 @@
 /*
  * ヒューリスティックコンテストの種別・重み DB を生成する。
  *
- *   node tools/build_contest_db.js                     # ネットワークから取得
- *   node tools/build_contest_db.js path/to/contests.json
+ *   node tools/build_contest_db.js                      # 全部ネットワークから取得
+ *   node tools/build_contest_db.js --cached-ids         # ID 一覧はローカルのものを使う
+ *   node tools/build_contest_db.js path/to/contests.json --cached-ids   # 完全オフライン
  *
- * 対象コンテストの ID は AtCoder 公式のアーカイブ
+ * 対象コンテストの ID は AtCoder 公式アーカイブ
  *   https://atcoder.jp/contests/archive?ratedType=4
- * から取得したものを tools/heuristic_contest_ids.json に置いてある。
+ * をページングして取得し、tools/heuristic_contest_ids.json に保存する。
  * 開催日時・開催時間は AtCoder Problems の contests.json から引く。
  *
  * unrated なコンテスト（rate_change = "-"）はレーティング計算に一切寄与しないため除外する。
@@ -27,6 +28,10 @@ const OUT = path.join(__dirname, "..", "contests_heuristic.json");
 /** 長期／短期の境界。短期は 3.5〜6 時間、長期は 1 週間以上なので 24 時間で切る。 */
 const LONG_THRESHOLD_HOURS = 24;
 
+/** アーカイブのページ取得間隔（ミリ秒）と上限ページ数 */
+const FETCH_INTERVAL_MS = 1000;
+const MAX_PAGES = 20;
+
 /**
  * AHC Rating System ver.2 の重み規定（https://atcoder.jp/posts/1380）。
  *   2024 年以前 : 全て 1.0
@@ -37,6 +42,8 @@ const LONG_THRESHOLD_HOURS = 24;
  * v3 も存在せず、各コンテストページにも重みの記載は無い）。ここでは 2025 年と同じ
  * 長期 1.0 / 短期 0.5 を暫定採用する。2025 年はこれで長期 6.0・短期 6.0 と釣り合っていたが、
  * 2026 年の長期／短期の開催数比が 1:2 から外れれば別の係数になるため、これは仮定である。
+ *
+ * !! 公式が新しい重みを発表したら、この関数を手で更新すること。自動更新では検知できない。
  */
 function weightOf(year, type) {
   if (year <= 2024) return 1.0;
@@ -48,6 +55,28 @@ function toJst(epochSeconds) {
   return new Date((epochSeconds + 9 * 3600) * 1000).toISOString().replace("Z", "+09:00");
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/** 公式アーカイブをページングしてヒューリスティックコンテストの ID を集める */
+async function fetchHeuristicIds() {
+  const ids = new Set();
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    const res = await fetch(`${ARCHIVE_URL}&page=${page}`);
+    if (!res.ok) throw new Error(`${ARCHIVE_URL}&page=${page}: HTTP ${res.status}`);
+    const html = await res.text();
+    const found = [...html.matchAll(/href="\/contests\/([a-z0-9_-]+)"/g)]
+      .map((m) => m[1])
+      .filter((id) => id !== "archive"); // ナビゲーションのリンク
+    if (found.length === 0) {
+      console.log(`アーカイブ ${page - 1} ページ分を取得しました`);
+      return [...ids].sort();
+    }
+    found.forEach((id) => ids.add(id));
+    await sleep(FETCH_INTERVAL_MS);
+  }
+  throw new Error(`アーカイブが ${MAX_PAGES} ページを超えました。MAX_PAGES を見直してください`);
+}
+
 async function loadContests(arg) {
   if (arg) return JSON.parse(fs.readFileSync(arg, "utf8"));
   const res = await fetch(SOURCE_URL);
@@ -56,13 +85,20 @@ async function loadContests(arg) {
 }
 
 (async () => {
-  const ids = new Set(JSON.parse(fs.readFileSync(IDS, "utf8")));
-  const meta = new Map((await loadContests(process.argv[2])).map((c) => [c.id, c]));
+  const args = process.argv.slice(2);
+  const contestsPath = args.find((a) => !a.startsWith("--"));
+  const useCachedIds = args.includes("--cached-ids");
 
-  const missing = [...ids].filter((id) => !meta.has(id) && id !== "archive");
-  if (missing.length) console.warn("contests.json に存在しない ID:", missing.join(", "));
+  const ids = useCachedIds
+    ? JSON.parse(fs.readFileSync(IDS, "utf8"))
+    : await fetchHeuristicIds();
+  const meta = new Map((await loadContests(contestsPath)).map((c) => [c.id, c]));
 
-  const contests = [...ids]
+  // contests.json 側の反映が遅れている場合、直近のコンテストが欠けることがある
+  const unknown = ids.filter((id) => !meta.has(id));
+  if (unknown.length) console.warn("contests.json に未反映の ID:", unknown.join(", "));
+
+  const contests = ids
     .map((id) => meta.get(id))
     .filter((c) => c && c.rate_change && c.rate_change !== "-") // unrated は除外
     .sort((a, b) => a.start_epoch_second - b.start_epoch_second)
@@ -81,6 +117,19 @@ async function loadContests(arg) {
         weight: weightOf(Number(end.slice(0, 4)), type),
       };
     });
+
+  // 無人実行での事故防止。スクレイプ失敗で DB が消し飛ぶのを防ぐ
+  if (fs.existsSync(OUT)) {
+    const prev = JSON.parse(fs.readFileSync(OUT, "utf8")).contests;
+    if (contests.length < prev.length) {
+      throw new Error(
+        `収録数が減っています（${prev.length} → ${contests.length}）。` +
+          `取得に失敗した可能性があるため中断します`
+      );
+    }
+    const added = contests.filter((c) => !prev.some((p) => p.id === c.id));
+    console.log(added.length ? `新規: ${added.map((c) => c.id).join(", ")}` : "新規コンテストなし");
+  }
 
   const byYear = {};
   for (const c of contests) {
@@ -107,9 +156,22 @@ async function loadContests(arg) {
     contests,
   };
 
+  if (!useCachedIds) fs.writeFileSync(IDS, JSON.stringify(ids, null, 1) + "\n");
   fs.writeFileSync(OUT, JSON.stringify(db, null, 2) + "\n");
-  console.log(`${contests.length} 件を ${path.relative(process.cwd(), OUT)} に書き出しました`);
+
+  const lines = [`${contests.length} 件を ${path.relative(process.cwd(), OUT)} に書き出しました`];
   for (const [y, s] of Object.entries(byYear)) {
-    console.log(`  ${y}: ${s.count} 戦 (長期 ${s.long} / 短期 ${s.short}) 重み合計 ${s.totalWeight}`);
+    // 長期の重みは全年で 1.0 なので、長期の重み合計 = 長期の開催数
+    const shortWeight = s.totalWeight - s.long;
+    lines.push(
+      `  ${y}: ${s.count} 戦 (長期 ${s.long} / 短期 ${s.short})  ` +
+        `重み合計 ${s.totalWeight} = 長期 ${s.long.toFixed(1)} + 短期 ${shortWeight.toFixed(1)}`
+    );
+  }
+  console.log(lines.join("\n"));
+
+  // GitHub Actions のジョブサマリに出す
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "```\n" + lines.join("\n") + "\n```\n");
   }
 })();
