@@ -28,6 +28,16 @@ footer {
   color: var(--muted);
   font-size: 12px;
 }
+footer .disclaimer {
+  border-left: 3px solid var(--border);
+  padding-left: 10px;
+  margin-bottom: 4px;
+}
+footer .disclaimer-list {
+  border-left: 3px solid var(--border);
+  margin: 0 0 8px;
+  padding: 0 0 0 30px;
+}
 
 a { color: var(--accent); }
 

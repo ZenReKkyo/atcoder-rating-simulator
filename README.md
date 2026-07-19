@@ -1,7 +1,19 @@
-# AtCoder Rating Simulator
+# AtCoder Rating Simulator 2
 
 今後のコンテストのパフォーマンスを入力して、AtCoder のレーティング推移をシミュレートする Web アプリ。
 依存パッケージなし・ビルド不要の静的ファイルです。
+
+<https://zenrekkyo.github.io/atcoder-rating-simulator/>
+
+> **本サービスについて**
+>
+> 「AtCoder Rating Simulator 2」は個人が独自に作成したものです。
+> 以下のサービスとは**一切関係ありません**（作者・運営・コードのいずれも無関係です）。
+>
+> - 旧「AtCoder Rating Simulator」
+> - 「AtCoder Rating Simulator(仮)」 <https://beta.kyo-pro.club/apps/rating-simulator>
+>
+> また、AtCoder 株式会社とも関係のない非公式のツールです。
 
 ## 使い方
 
