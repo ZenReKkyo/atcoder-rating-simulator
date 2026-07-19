@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ファビコン（透明背景 + 黒のギリシャ文字 ρ）を生成する。
+"""ファビコン（白背景 + 黒のギリシャ文字 ρ）を生成する。
 
     python3 tools/make_favicon.py
 
@@ -22,6 +22,8 @@ from fontTools.ttLib import TTFont
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 RHO = "ρ"
 COLOR = "#000000"
+BG = "#FFFFFF"
+BG_RGB = (255, 255, 255)
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.dirname(HERE)
 
@@ -56,7 +58,8 @@ def build_svg() -> str:
 
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {CANVAS} {CANVAS}">\n'
-        f"  <!-- 透明背景 + 黒のギリシャ文字 ρ -->\n"
+        f"  <!-- 白背景 + 黒のギリシャ文字 ρ -->\n"
+        f'  <rect width="{CANVAS}" height="{CANVAS}" fill="{BG}"/>\n'
         f'  <path transform="translate({tx:.3f} {ty:.3f}) scale({scale:.6f} -{scale:.6f})"\n'
         f'        fill="{COLOR}" d="{d}"/>\n'
         f"</svg>\n"
@@ -73,14 +76,18 @@ def render_ink() -> Image.Image:
 
 
 def fit(ink: Image.Image, size: int) -> Image.Image:
-    """ink を size×size の透明キャンバスに中央寄せで収める。"""
+    """ink を size×size の白いキャンバスに中央寄せで収める。"""
     pad = max(1, round(size * PAD_RATIO))
     inner = size - 2 * pad
     scale = min(inner / ink.width, inner / ink.height)
     w, h = max(1, round(ink.width * scale)), max(1, round(ink.height * scale))
 
-    out = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    out.paste(ink.resize((w, h), Image.LANCZOS), ((size - w) // 2, (size - h) // 2))
+    # RGB で作る。RGBA だとマスク付き paste で背景側のアルファまで合成され、
+    # グリフの縁に半透明画素が残ってしまう
+    out = Image.new("RGB", (size, size), BG_RGB)
+    glyph = ink.resize((w, h), Image.LANCZOS)
+    # 第 3 引数にマスクを渡し、アンチエイリアスを白地に合成する
+    out.paste(glyph, ((size - w) // 2, (size - h) // 2), glyph)
     return out
 
 
