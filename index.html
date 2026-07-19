@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtCoder Rating Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>AtCoder Rating Simulator</h1>
+  <p class="lead">今後のパフォーマンスを入力して、レーティングの変化をシミュレートします。</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="algo">アルゴリズム</button>
+  <button class="tab" data-tab="heuristic">ヒューリスティック</button>
+</nav>
+
+<!-- ============================================ アルゴリズム ============================================ -->
+<section class="panel active" id="panel-algo">
+
+  <div class="card">
+    <h2>現在の状態</h2>
+    <div class="radio-row">
+      <label><input type="radio" name="algo-src" value="manual" checked> 手入力</label>
+      <label><input type="radio" name="algo-src" value="user"> ユーザー名から取得</label>
+    </div>
+
+    <div class="src-body" id="algo-src-manual">
+      <div class="field-row">
+        <label>現在のレーティング <input type="number" id="algo-rating" value="1200" min="0" step="1"></label>
+        <label>Rated 参加回数 <input type="number" id="algo-count" value="10" min="0" step="1"></label>
+      </div>
+    </div>
+
+    <div class="src-body hidden" id="algo-src-user">
+      <div class="field-row">
+        <label>ユーザー名 <input type="text" id="algo-user" placeholder="chokudai"></label>
+        <button class="btn" id="algo-fetch">取得</button>
+      </div>
+      <p class="status" id="algo-fetch-status"></p>
+      <p class="note">AtCoder 公式 API は CORS を許可していないため、
+        <a href="https://kenkoooo.com/atcoder/" target="_blank" rel="noopener">AtCoder Problems</a>
+        のプロキシ経由でレーティング履歴を取得します。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>今後のパフォーマンス</h2>
+    <div class="rows" id="algo-rows"></div>
+    <div class="row-actions">
+      <button class="btn" id="algo-add">＋ 1 行追加</button>
+      <button class="btn ghost" id="algo-add5">＋ 5 行追加</button>
+      <button class="btn ghost" id="algo-clear">全消去</button>
+      <button class="btn ghost" id="algo-bulk-toggle">まとめて入力</button>
+    </div>
+    <div class="bulk hidden" id="algo-bulk">
+      <textarea id="algo-bulk-text" rows="5" placeholder="1600&#10;1750&#10;1820&#10;（改行またはカンマ区切り）"></textarea>
+      <button class="btn" id="algo-bulk-apply">反映</button>
+    </div>
+  </div>
+
+  <details class="card collapsible" id="algo-solve-card" open>
+    <summary>逆算：目標レートに到達するのに必要なパフォーマンス</summary>
+    <div class="field-row">
+      <label>目標レーティング <input type="number" id="algo-target" value="1600" min="0" step="1"></label>
+      <label>コンテスト回数 <input type="number" id="algo-target-n" value="10" min="1" step="1"></label>
+      <button class="btn" id="algo-target-apply">今後のパフォーマンス欄に反映</button>
+    </div>
+    <div class="solve-result" id="algo-solve"></div>
+    <div class="table-wrap" id="algo-solve-table"></div>
+    <p class="note">毎回同じパフォーマンスを取り続けると仮定したときに必要な値です。
+      レーティングはパフォーマンスに対して単調増加なので、二分探索で求めています。</p>
+  </details>
+
+  <div class="card result">
+    <h2>シミュレーション結果</h2>
+    <div class="summary" id="algo-summary"></div>
+    <div class="chart-wrap" id="algo-chart"></div>
+    <div class="table-wrap" id="algo-table"></div>
+  </div>
+</section>
+
+<!-- ============================================ ヒューリスティック ============================================ -->
+<section class="panel" id="panel-heuristic">
+
+  <div class="card">
+    <h2>現在の状態</h2>
+    <div class="radio-row">
+      <label><input type="radio" name="heu-src" value="manual" checked> 手入力（近似）</label>
+      <label><input type="radio" name="heu-src" value="json"> 履歴 JSON を貼り付け（正確）</label>
+    </div>
+
+    <div class="src-body" id="heu-src-manual">
+      <div class="field-row">
+        <label>現在のレーティング <input type="number" id="heu-rating" value="1200" min="0" step="1"></label>
+        <label>Rated 参加回数 <input type="number" id="heu-count" value="10" min="0" step="1"></label>
+        <label>過去コンテストの間隔（日） <input type="number" id="heu-past-interval" value="21" min="1" step="1"></label>
+      </div>
+      <p class="note">AHC のレートは全パフォーマンス履歴と各コンテストの日付に依存するため、
+        現在レートと参加回数だけからは一意に定まりません。ここでは
+        <strong>全回で同一のパフォーマンスを取り、指定間隔で開催された</strong>と仮定して等価な履歴を逆算します（近似）。
+        正確に計算したい場合は「履歴 JSON を貼り付け」を使ってください。</p>
+    </div>
+
+    <div class="src-body hidden" id="heu-src-json">
+      <p class="note">ブラウザで
+        <code>https://atcoder.jp/users/<b>ユーザー名</b>/history/json?contestType=heuristic</code>
+        を開き、表示された内容をそのまま貼り付けてください。
+        （公式 API は CORS を許可しておらず、AtCoder Problems のプロキシは
+        <code>contestType</code> を落としてしまうため、ページから直接取得できません。）</p>
+      <div class="field-row">
+        <label class="grow">ユーザー名 <input type="text" id="heu-user" placeholder="chokudai"></label>
+        <button class="btn ghost" id="heu-open">JSON を開く</button>
+      </div>
+      <p class="note">各コンテストの重み（長期 1.0 / 短期 0.5）は同梱の
+        <code>contests_heuristic.json</code> から自動判定します。unrated なコンテストは計算に含めません。</p>
+      <textarea id="heu-json" rows="6" placeholder='[{"IsRated":true,"Performance":1500,"EndTime":"2024-01-01T19:00:00+09:00", ...}, ...]'></textarea>
+      <div class="row-actions">
+        <button class="btn" id="heu-json-apply">読み込み</button>
+        <span class="status" id="heu-json-status"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>今後のコンテスト</h2>
+    <p class="note">「間隔」は<strong>前回のコンテストからの日数</strong>です。AHC のレートは
+      直近コンテストの終了日を基準に <code>年あたり 100</code> の自然減衰を受けるため、
+      間隔が空くほど過去のパフォーマンスの寄与が下がります。
+      重みは 2025 年以降、長期コンテスト = 1.0 / 短期コンテスト = 0.5 です。</p>
+    <div class="field-row">
+      <label>既定の間隔（日） <input type="number" id="heu-default-interval" value="21" min="1" step="1"></label>
+      <label>既定の重み
+        <select id="heu-default-weight">
+          <option value="1">1.0（長期）</option>
+          <option value="0.5">0.5（短期）</option>
+        </select>
+      </label>
+    </div>
+    <div class="rows" id="heu-rows"></div>
+    <div class="row-actions">
+      <button class="btn" id="heu-add">＋ 1 行追加</button>
+      <button class="btn ghost" id="heu-add5">＋ 5 行追加</button>
+      <button class="btn ghost" id="heu-clear">全消去</button>
+    </div>
+  </div>
+
+  <div class="card result">
+    <h2>シミュレーション結果</h2>
+    <div class="summary" id="heu-summary"></div>
+    <div class="chart-wrap" id="heu-chart"></div>
+    <div class="table-wrap" id="heu-table"></div>
+  </div>
+</section>
+
+<footer>
+  <p>計算式は公式資料
+    <a href="https://atcoder.jp/posts/16" target="_blank" rel="noopener">AtCoder Rating System ver.1.00</a> /
+    <a href="https://atcoder.jp/posts/1381" target="_blank" rel="noopener">AHC Rating System ver.2</a>
+    に準拠しています。</p>
+</footer>
+
+<script src="rating.js"></script>
+<script src="chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

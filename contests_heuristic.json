@@ -1,0 +1,693 @@
+{
+  "description": "AtCoder ヒューリスティックコンテスト（rated のみ）の種別と重み",
+  "ratingSystem": "AHC Rating System ver.2 (https://atcoder.jp/posts/1381)",
+  "sources": {
+    "contestIds": "https://atcoder.jp/contests/archive?ratedType=4",
+    "schedule": "https://kenkoooo.com/atcoder/resources/contests.json"
+  },
+  "weightRule": {
+    "2025": "長期 1.0 / 短期 0.5",
+    "-2024": "全て 1.0",
+    "2026-": "長期の年間重み合計と短期の年間重み合計がおよそ等しくなるよう調整される予定。2026-07 時点で具体的な数値は未発表のため、2025 年と同じ 長期 1.0 / 短期 0.5 を暫定採用（仮定）。"
+  },
+  "longThresholdHours": 24,
+  "summaryByYear": {
+    "2021": {
+      "count": 9,
+      "long": 4,
+      "short": 5,
+      "totalWeight": 9
+    },
+    "2022": {
+      "count": 9,
+      "long": 5,
+      "short": 4,
+      "totalWeight": 9
+    },
+    "2023": {
+      "count": 13,
+      "long": 8,
+      "short": 5,
+      "totalWeight": 13
+    },
+    "2024": {
+      "count": 12,
+      "long": 6,
+      "short": 6,
+      "totalWeight": 12
+    },
+    "2025": {
+      "count": 18,
+      "long": 6,
+      "short": 12,
+      "totalWeight": 12
+    },
+    "2026": {
+      "count": 10,
+      "long": 3,
+      "short": 7,
+      "totalWeight": 6.5
+    }
+  },
+  "contests": [
+    {
+      "id": "ahc001",
+      "title": "AtCoder Heuristic Contest 001",
+      "start": "2021-03-06T12:00:00.000+09:00",
+      "end": "2021-03-14T20:00:00.000+09:00",
+      "durationHours": 200,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc002",
+      "title": "AtCoder Heuristic Contest 002",
+      "start": "2021-04-25T19:00:00.000+09:00",
+      "end": "2021-04-25T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc003",
+      "title": "AtCoder Heuristic Contest 003",
+      "start": "2021-05-22T12:00:00.000+09:00",
+      "end": "2021-05-30T20:00:00.000+09:00",
+      "durationHours": 200,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc004",
+      "title": "AtCoder Heuristic Contest 004",
+      "start": "2021-06-26T13:00:00.000+09:00",
+      "end": "2021-06-26T19:00:00.000+09:00",
+      "durationHours": 6,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc005",
+      "title": "AtCoder Heuristic Contest 005",
+      "start": "2021-08-07T16:00:00.000+09:00",
+      "end": "2021-08-07T20:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "rcl-contest-2021-long",
+      "title": "RECRUIT 日本橋ハーフマラソン 2021〜増刊号〜",
+      "start": "2021-09-05T18:00:00.000+09:00",
+      "end": "2021-09-12T18:00:00.000+09:00",
+      "durationHours": 168,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "future-contest-2022-qual",
+      "title": "HACK TO THE FUTURE 2022 予選",
+      "start": "2021-11-03T19:00:00.000+09:00",
+      "end": "2021-11-13T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc006",
+      "title": "京セラプログラミングコンテスト（AtCoder Heuristic Contest 006）",
+      "start": "2021-11-14T16:00:00.000+09:00",
+      "end": "2021-11-14T20:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc007",
+      "title": "THIRD プログラミングコンテスト 2021 （AtCoder Heuristic Contest 007）",
+      "start": "2021-12-12T16:00:00.000+09:00",
+      "end": "2021-12-12T20:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc008",
+      "title": "MC Digital プログラミングコンテスト2022（AtCoder Heuristic Contest 008）",
+      "start": "2022-02-12T12:00:00.000+09:00",
+      "end": "2022-02-26T19:00:00.000+09:00",
+      "durationHours": 343,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc009",
+      "title": "モノグサ プログラミングコンテスト2022（AtCoder Heuristic Contest 009）",
+      "start": "2022-03-26T15:00:00.000+09:00",
+      "end": "2022-03-26T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc010",
+      "title": "ALGO ARTIS プログラミングコンテスト2022（AtCoder Heuristic Contest 010）",
+      "start": "2022-04-24T15:00:00.000+09:00",
+      "end": "2022-04-24T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc011",
+      "title": "AtCoder Heuristic Contest 011",
+      "start": "2022-05-28T12:00:00.000+09:00",
+      "end": "2022-06-05T19:00:00.000+09:00",
+      "durationHours": 199,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc012",
+      "title": "AtCoder Heuristic Contest 012",
+      "start": "2022-07-03T15:00:00.000+09:00",
+      "end": "2022-07-03T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc013",
+      "title": "RECRUIT 日本橋ハーフマラソン 2022夏（AtCoder Heuristic Contest 013）",
+      "start": "2022-08-09T21:00:00.000+09:00",
+      "end": "2022-08-16T21:00:00.000+09:00",
+      "durationHours": 168,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc014",
+      "title": "estie プログラミングコンテスト2022（AtCoder Heuristic Contest 014）",
+      "start": "2022-09-17T15:00:00.000+09:00",
+      "end": "2022-10-01T19:00:00.000+09:00",
+      "durationHours": 340,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc015",
+      "title": "トヨタ自動車 プログラミングコンテスト2022（AtCoder Heuristic Contest 015）",
+      "start": "2022-10-30T15:00:00.000+09:00",
+      "end": "2022-10-30T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc016",
+      "title": "HACK TO THE FUTURE 2023 予選（AtCoder Heuristic Contest 016）",
+      "start": "2022-11-11T19:00:00.000+09:00",
+      "end": "2022-11-20T19:00:00.000+09:00",
+      "durationHours": 216,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc017",
+      "title": "THIRD プログラミングコンテスト 2022 （AtCoder Heuristic Contest 017）",
+      "start": "2023-01-28T12:00:00.000+09:00",
+      "end": "2023-02-05T20:00:00.000+09:00",
+      "durationHours": 200,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc018",
+      "title": "RECRUIT 日本橋ハーフマラソン 2023冬（AtCoder Heuristic Contest 018）",
+      "start": "2023-02-18T12:00:00.000+09:00",
+      "end": "2023-02-26T19:00:00.000+09:00",
+      "durationHours": 199,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc019",
+      "title": "MC Digital プログラミングコンテスト2023（AtCoder Heuristic Contest 019）",
+      "start": "2023-03-18T12:00:00.000+09:00",
+      "end": "2023-04-02T19:00:00.000+09:00",
+      "durationHours": 367,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc020",
+      "title": "ALGO ARTIS プログラミングコンテスト2023（AtCoder Heuristic Contest 020）",
+      "start": "2023-06-11T15:00:00.000+09:00",
+      "end": "2023-06-11T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc021",
+      "title": "TOYOTA Programming Contest 2023 Summer（AtCoder Heuristic Contest 021）",
+      "start": "2023-06-25T15:00:00.000+09:00",
+      "end": "2023-06-25T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc022",
+      "title": "RECRUIT 日本橋ハーフマラソン 2023夏（AtCoder Heuristic Contest 022）",
+      "start": "2023-08-11T12:00:00.000+09:00",
+      "end": "2023-08-20T19:00:00.000+09:00",
+      "durationHours": 223,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "toyota2023summer-final",
+      "title": "TOYOTA Programming Contest 2023 Summer final",
+      "start": "2023-08-27T10:15:00.000+09:00",
+      "end": "2023-08-27T13:45:00.000+09:00",
+      "durationHours": 3.5,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc023",
+      "title": "第10回 Asprova プログラミングコンテスト（AtCoder Heuristic Contest 023）",
+      "start": "2023-09-03T10:00:00.000+09:00",
+      "end": "2023-09-10T20:00:00.000+09:00",
+      "durationHours": 178,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc024",
+      "title": "丸紅プログラミングコンテスト2023（AtCoder Heuristic Contest 024）",
+      "start": "2023-09-24T15:00:00.000+09:00",
+      "end": "2023-09-24T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc025",
+      "title": "AtCoder Heuristic Contest 025",
+      "start": "2023-10-14T12:00:00.000+09:00",
+      "end": "2023-10-22T19:00:00.000+09:00",
+      "durationHours": 199,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc026",
+      "title": "トヨタ自動車プログラミングコンテスト2023#6（AtCoder Heuristic Contest 026）",
+      "start": "2023-11-05T15:00:00.000+09:00",
+      "end": "2023-11-05T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc027",
+      "title": "HACK TO THE FUTURE 2024 （AtCoder Heuristic Contest 027）",
+      "start": "2023-12-01T19:00:00.000+09:00",
+      "end": "2023-12-10T19:00:00.000+09:00",
+      "durationHours": 216,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc029",
+      "title": "RECRUIT 日本橋ハーフマラソン 2024冬（AtCoder Heuristic Contest 029）",
+      "start": "2023-12-22T12:00:00.000+09:00",
+      "end": "2023-12-26T21:00:00.000+09:00",
+      "durationHours": 105,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc028",
+      "title": "ALGO ARTIS プログラミングコンテスト2023 冬（AtCoder Heuristic Contest 028）",
+      "start": "2024-01-13T15:00:00.000+09:00",
+      "end": "2024-01-13T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc030",
+      "title": "THIRD プログラミングコンテスト2023（AtCoder Heuristic Contest 030）",
+      "start": "2024-02-09T19:00:00.000+09:00",
+      "end": "2024-02-19T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc031",
+      "title": "MC Digital プログラミングコンテスト2024（AtCoder Heuristic Contest 031）",
+      "start": "2024-03-22T19:00:00.000+09:00",
+      "end": "2024-04-01T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc032",
+      "title": "AtCoder Heuristic Contest 032",
+      "start": "2024-04-07T19:00:00.000+09:00",
+      "end": "2024-04-07T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc033",
+      "title": "トヨタ自動車プログラミングコンテスト2024#5（AtCoder Heuristic Contest 033）",
+      "start": "2024-05-17T19:00:00.000+09:00",
+      "end": "2024-05-27T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc034",
+      "title": "トヨタ自動車プログラミングコンテスト2024#6（AtCoder Heuristic Contest 034）",
+      "start": "2024-06-16T15:00:00.000+09:00",
+      "end": "2024-06-16T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc035",
+      "title": "ALGO ARTIS プログラミングコンテスト2024 夏（AtCoder Heuristic Contest 035）",
+      "start": "2024-07-21T15:00:00.000+09:00",
+      "end": "2024-07-21T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc036",
+      "title": "RECRUIT 日本橋ハーフマラソン 2024夏（AtCoder Heuristic Contest 036）",
+      "start": "2024-08-23T19:00:00.000+09:00",
+      "end": "2024-09-02T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc037",
+      "title": "第11回 Asprova プログラミングコンテスト（AtCoder Heuristic Contest 037）",
+      "start": "2024-09-15T19:00:00.000+09:00",
+      "end": "2024-09-15T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc038",
+      "title": "トヨタ自動車プログラミングコンテスト2024#10（AtCoder Heuristic Contest 038）",
+      "start": "2024-10-04T19:00:00.000+09:00",
+      "end": "2024-10-14T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc039",
+      "title": "THIRD プログラミングコンテスト2024（AtCoder Heuristic Contest 039）",
+      "start": "2024-11-10T15:00:00.000+09:00",
+      "end": "2024-11-10T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 1
+    },
+    {
+      "id": "ahc040",
+      "title": "HACK TO THE FUTURE 2025 （AtCoder Heuristic Contest 040）",
+      "start": "2024-11-29T19:00:00.000+09:00",
+      "end": "2024-12-09T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc041",
+      "title": "ALGO ARTIS プログラミングコンテスト2025 冬（AtCoder Heuristic Contest 041）",
+      "start": "2025-01-19T15:00:00.000+09:00",
+      "end": "2025-01-19T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc042",
+      "title": "AtCoder Heuristic Contest 042",
+      "start": "2025-02-02T19:00:00.000+09:00",
+      "end": "2025-02-02T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc043",
+      "title": "RECRUIT 日本橋ハーフマラソン 2025冬（AtCoder Heuristic Contest 043）",
+      "start": "2025-02-14T19:00:00.000+09:00",
+      "end": "2025-02-24T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc044",
+      "title": "AtCoder Heuristic Contest 044",
+      "start": "2025-03-16T19:00:00.000+09:00",
+      "end": "2025-03-16T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc045",
+      "title": "THIRD プログラミングコンテスト2025（AtCoder Heuristic Contest 045）",
+      "start": "2025-03-28T19:00:00.000+09:00",
+      "end": "2025-04-07T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc046",
+      "title": "BrainPad プログラミングコンテスト 2025 （AtCoder Heuristic Contest 046）",
+      "start": "2025-04-26T15:00:00.000+09:00",
+      "end": "2025-04-26T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc047",
+      "title": "トヨタ自動車プログラミングコンテスト2025#2（AtCoder Heuristic Contest 047）",
+      "start": "2025-05-18T19:00:00.000+09:00",
+      "end": "2025-05-18T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc048",
+      "title": "MC Digital プログラミングコンテスト2025（AtCoder Heuristic Contest 048）",
+      "start": "2025-05-30T19:00:00.000+09:00",
+      "end": "2025-06-09T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc049",
+      "title": "トヨタ自動車プログラミングコンテスト2025#3（AtCoder Heuristic Contest 049）",
+      "start": "2025-06-21T15:00:00.000+09:00",
+      "end": "2025-06-21T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc050",
+      "title": "AtCoder Heuristic Contest 050",
+      "start": "2025-07-06T19:00:00.000+09:00",
+      "end": "2025-07-06T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc051",
+      "title": "THIRD プログラミングコンテスト 2025 夏（AtCoder Heuristic Contest 051）",
+      "start": "2025-08-01T19:00:00.000+09:00",
+      "end": "2025-08-11T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc052",
+      "title": "AtCoder Heuristic Contest 052",
+      "start": "2025-08-23T15:00:00.000+09:00",
+      "end": "2025-08-23T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc053",
+      "title": "第12回 Asprova プログラミングコンテスト（AtCoder Heuristic Contest 053）",
+      "start": "2025-09-13T19:00:00.000+09:00",
+      "end": "2025-09-13T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc054",
+      "title": "ALGO ARTIS プログラミングコンテスト2025 夏（AtCoder Heuristic Contest 054）",
+      "start": "2025-09-19T19:00:00.000+09:00",
+      "end": "2025-09-29T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc055",
+      "title": "RECRUIT 日本橋ハーフマラソン 2025秋（AtCoder Heuristic Contest 055）",
+      "start": "2025-10-19T19:00:00.000+09:00",
+      "end": "2025-10-19T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc056",
+      "title": "HACK TO THE FUTURE 2026 （AtCoder Heuristic Contest 056）",
+      "start": "2025-11-07T19:00:00.000+09:00",
+      "end": "2025-11-17T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc057",
+      "title": "AtCoder Heuristic Contest 057",
+      "start": "2025-11-29T15:00:00.000+09:00",
+      "end": "2025-11-29T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc058",
+      "title": "ALGO ARTIS プログラミングコンテスト2025 師走（AtCoder Heuristic Contest 058）",
+      "start": "2025-12-14T15:00:00.000+09:00",
+      "end": "2025-12-14T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc059",
+      "title": "AtCoder Heuristic Contest 059",
+      "start": "2026-01-10T15:00:00.000+09:00",
+      "end": "2026-01-10T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc060",
+      "title": "RECRUIT 日本橋ハーフマラソン 2026冬（AtCoder Heuristic Contest 060）",
+      "start": "2026-02-01T19:00:00.000+09:00",
+      "end": "2026-02-01T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc061",
+      "title": "THIRD プログラミングコンテスト 2026 （AtCoder Heuristic Contest 061）",
+      "start": "2026-02-13T19:00:00.000+09:00",
+      "end": "2026-02-23T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc062",
+      "title": "ユニークビジョンプログラミングコンテスト2026 春（AtCoder Heuristic Contest 062）",
+      "start": "2026-03-14T15:00:00.000+09:00",
+      "end": "2026-03-14T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc063",
+      "title": "AtCoder Heuristic Contest 063",
+      "start": "2026-04-03T19:00:00.000+09:00",
+      "end": "2026-04-13T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc064",
+      "title": "JR西日本・ALGO ARTIS プログラミングコンテスト（AtCoder Heuristic Contest 064）",
+      "start": "2026-04-26T15:00:00.000+09:00",
+      "end": "2026-04-26T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc065",
+      "title": "AtCoder Heuristic Contest 065",
+      "start": "2026-05-16T15:00:00.000+09:00",
+      "end": "2026-05-16T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc066",
+      "title": "AtCoder Heuristic Contest 066",
+      "start": "2026-05-29T20:00:00.000+09:00",
+      "end": "2026-06-08T19:00:00.000+09:00",
+      "durationHours": 239,
+      "type": "long",
+      "weight": 1
+    },
+    {
+      "id": "ahc067",
+      "title": "AtCoder Heuristic Contest 067",
+      "start": "2026-06-21T19:00:00.000+09:00",
+      "end": "2026-06-21T23:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    },
+    {
+      "id": "ahc068",
+      "title": "estie プログラミングコンテスト2026 （AtCoder Heuristic Contest 068）",
+      "start": "2026-07-18T15:00:00.000+09:00",
+      "end": "2026-07-18T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
+    }
+  ]
+}
