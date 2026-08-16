@@ -43,10 +43,10 @@
       "totalWeight": 12
     },
     "2026": {
-      "count": 10,
-      "long": 3,
+      "count": 11,
+      "long": 4,
       "short": 7,
-      "totalWeight": 6.5
+      "totalWeight": 7.5
     }
   },
   "contests": [
@@ -688,6 +688,15 @@
       "durationHours": 4,
       "type": "short",
       "weight": 0.5
+    },
+    {
+      "id": "ahc069",
+      "title": "RECRUIT 日本橋ハーフマラソン 2026夏（AtCoder Heuristic Contest 069）",
+      "start": "2026-07-31T19:00:00.000+09:00",
+      "end": "2026-08-10T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
     }
   ]
 }
