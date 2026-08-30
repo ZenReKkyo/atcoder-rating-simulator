@@ -43,10 +43,10 @@
       "totalWeight": 12
     },
     "2026": {
-      "count": 11,
+      "count": 12,
       "long": 4,
-      "short": 7,
-      "totalWeight": 7.5
+      "short": 8,
+      "totalWeight": 8
     }
   },
   "contests": [
@@ -697,6 +697,15 @@
       "durationHours": 240,
       "type": "long",
       "weight": 1
+    },
+    {
+      "id": "ahc070",
+      "title": "第13回 Asprova プログラミングコンテスト（AtCoder Heuristic Contest 070）",
+      "start": "2026-08-29T15:00:00.000+09:00",
+      "end": "2026-08-29T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
     }
   ]
 }
