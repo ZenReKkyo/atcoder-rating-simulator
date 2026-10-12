@@ -43,10 +43,10 @@
       "totalWeight": 12
     },
     "2026": {
-      "count": 13,
-      "long": 4,
+      "count": 14,
+      "long": 5,
       "short": 9,
-      "totalWeight": 8.5
+      "totalWeight": 9.5
     }
   },
   "contests": [
@@ -715,6 +715,15 @@
       "durationHours": 4,
       "type": "short",
       "weight": 0.5
+    },
+    {
+      "id": "ahc072",
+      "title": "ALGO ARTIS プログラミングコンテスト2026 長月（AtCoder Heuristic Contest 072）",
+      "start": "2026-09-25T19:10:00.000+09:00",
+      "end": "2026-10-05T19:00:00.000+09:00",
+      "durationHours": 239.83,
+      "type": "long",
+      "weight": 1
     }
   ]
 }
