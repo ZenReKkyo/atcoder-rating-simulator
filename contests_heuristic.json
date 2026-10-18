@@ -43,10 +43,10 @@
       "totalWeight": 12
     },
     "2026": {
-      "count": 14,
+      "count": 15,
       "long": 5,
-      "short": 9,
-      "totalWeight": 9.5
+      "short": 10,
+      "totalWeight": 10
     }
   },
   "contests": [
@@ -724,6 +724,15 @@
       "durationHours": 239.83,
       "type": "long",
       "weight": 1
+    },
+    {
+      "id": "ahc073",
+      "title": "AtCoder Heuristic Contest 073",
+      "start": "2026-10-17T15:00:00.000+09:00",
+      "end": "2026-10-17T19:00:00.000+09:00",
+      "durationHours": 4,
+      "type": "short",
+      "weight": 0.5
     }
   ]
 }
