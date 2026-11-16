@@ -43,10 +43,10 @@
       "totalWeight": 12
     },
     "2026": {
-      "count": 15,
-      "long": 5,
+      "count": 16,
+      "long": 6,
       "short": 10,
-      "totalWeight": 10
+      "totalWeight": 11
     }
   },
   "contests": [
@@ -733,6 +733,15 @@
       "durationHours": 4,
       "type": "short",
       "weight": 0.5
+    },
+    {
+      "id": "ahc074",
+      "title": "HACK TO THE FUTURE 2027 （AtCoder Heuristic Contest 074）",
+      "start": "2026-10-30T19:00:00.000+09:00",
+      "end": "2026-11-09T19:00:00.000+09:00",
+      "durationHours": 240,
+      "type": "long",
+      "weight": 1
     }
   ]
 }
